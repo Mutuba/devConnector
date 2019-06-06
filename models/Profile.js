@@ -11,9 +11,6 @@ const ProfileSchema = new mongoose.Schema({
     type: String
   },
   status: {
-    type: String
-  },
-  status: {
     type: String,
     required: true
   },
