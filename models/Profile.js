@@ -1,9 +1,15 @@
 const mongoose = require("mongoose");
 const ProfileSchema = new mongoose.Schema({
   user: {
+    //user id as foreign key referencing user table
     type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
+  // handle: {
+  //   type: String,
+  //   required: true,
+  //   max: 40
+  // },
   company: {
     type: String
   },
@@ -15,7 +21,8 @@ const ProfileSchema = new mongoose.Schema({
     required: true
   },
   skills: {
-    type: String,
+    // Skills field stores an array of strings
+    type: [String],
     required: true
   },
   bio: {
