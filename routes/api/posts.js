@@ -15,7 +15,7 @@ router.post(
       check("text", "Text is required")
         .not()
         .isEmpty()
-    ],
+    ]
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -41,4 +41,15 @@ router.post(
     }
   }
 );
+//GET all posts
+// GET api/posts Private
+router.get("/", auth, async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ date: -1 });
+    res.json(posts)
+  } catch (error) {
+  console.log("Server Error")
+    res.status(500).send("Server Error")
+  }
+});
 module.exports = router;
