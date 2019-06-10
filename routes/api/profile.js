@@ -163,7 +163,7 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 //add one's profile experiences
-// DELETE api/profiles/experince and private
+// PUT api/profiles/experince and private
 router.put(
   "/experience",
   [
@@ -220,4 +220,22 @@ router.put(
     }
   }
 );
+//delete one's profile experiences
+// DELETE api/profiles/experince/:exp_id and private
+router.delete("/experience/:exp_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    //find or findIndex can return the index
+    // const removeIndex = profile.experience
+    //   .map(item => item.id)
+    //   .indexOf(req.params.exp_id);
+    // Better implementation using findIndex method works as above
+    const index = profile.experience.findIndex(
+      item => item.id === req.params.exp_id
+    );
+    profile.experience.splice(index, 1);
+    await profile.save();
+    res.json(profile);
+  } catch (error) {}
+});
 module.exports = router;
