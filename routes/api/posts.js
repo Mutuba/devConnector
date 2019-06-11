@@ -5,7 +5,6 @@ const config = require("config");
 const User = require("../../models/User");
 const Profile = require("../../models/Profile");
 const Post = require("../../models/Post");
-// ...rest of the initial code omitted for simplicity.
 const auth = require("../../middleware/auth");
 router.post(
   "/",
@@ -120,7 +119,7 @@ router.put("/like/:id", auth, async (req, res) => {
       return res.status(400).json({
         msg: "Post not found"
       });
-    console.console.log("Server Error");
+    console.error("Server Error");
     res.status(500).send("Server Error");
   }
 });
@@ -204,4 +203,45 @@ router.post(
     }
   }
 );
+
+//DELETE  comment on a post by id
+// DELETE api/posts/comment/:id/:comment_id Private
+router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
+  try {
+    // check if post exists in the database
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    //get a comment by id based on returned post
+    const comment = post.comments.find(
+      comment => comment.id == req.params.comment_id
+    );
+    // return not found if no comment
+    if (!comment) {
+      return res.status(404).json({ msg: "Comment not found" });
+    }
+    // check if user is the owner of the comment
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+    // get index of the comment so as to remove
+    // get by id and not by use_id as one user can post multiple comments
+    const index = post.comments.findIndex(
+      comment => comment.id === req.params.comment_id
+    );
+    // remove the comment at found index as the only one denoted by 1
+    post.comments.splice(index, 1);
+    //save the post with updated number of comments
+    await post.save();
+    res.json(post.comments);
+  } catch (error) {
+    if (error.kind == "ObjectId")
+      return res.status(404).json({
+        msg: "Item not found"
+      });
+    console.error("Server Error");
+    res.status(500).send("Server Error");
+  }
+});
 module.exports = router;

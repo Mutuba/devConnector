@@ -233,7 +233,7 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
     //   .indexOf(req.params.exp_id);
     // Better implementation using findIndex method works as above
     const index = profile.experience.findIndex(
-      item => item.id === req.params.exp_id
+      profile => profile.id === req.params.exp_id
     );
     // remove the experience at found index as the only one denoted by 1
     profile.experience.splice(index, 1);
