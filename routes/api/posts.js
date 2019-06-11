@@ -161,7 +161,7 @@ router.put("/unlike/:id", auth, async (req, res) => {
 //POST  comment a post by id
 // POST api/posts/comment/:id Private
 router.post(
-  "/",
+  "/comment/:id",
   [
     auth,
     [
@@ -178,18 +178,28 @@ router.post(
       });
     }
     try {
+      //get current user by id from the db based on logged in user but strip off the pswd
       const user = await User.findById(req.user.id).select("-password");
-      const newPost = {
+      //get the post by id based on the id in params
+      const post = await Post.findById(req.params.id);
+      if (!post) {
+        return res.status(404).json({ msg: "Post not found" });
+      }
+      const newComment = {
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
         user: req.user.id
       };
-      post = new Post(newPost);
+      post.comments.unshift(newComment);
       await post.save();
-      res.json(post);
+      res.json(post.comments);
     } catch (error) {
-      console.error(error.message);
+      if (error.kind == "ObjectId")
+        return res.status(400).json({
+          msg: "Post not found"
+        });
+      console.error("Server Error");
       res.status(500).send("Server Error");
     }
   }
