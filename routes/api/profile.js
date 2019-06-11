@@ -239,7 +239,10 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
     profile.experience.splice(index, 1);
     await profile.save();
     res.json(profile);
-  } catch (error) {}
+  } catch (error) {
+    console.error("Server Error");
+    res.status(500).send("Server Error");
+  }
 });
 
 //add one's profile education
@@ -332,9 +335,9 @@ router.get("/github/:username", (req, res) => {
       }/repos?per_page=5&sort=created:asc&client_id=${config.get(
         "githubClientId"
       )}&client_secret=${config.get("githubClientSecret")} `,
-      method: 'GET',
+      method: "GET",
       headers: {
-        'user-agent': 'node.js'
+        "user-agent": "node.js"
       }
     };
     request(options, (error, response, body) => {
