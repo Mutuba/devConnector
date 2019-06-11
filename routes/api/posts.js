@@ -136,6 +136,7 @@ router.put("/unlike/:id", auth, async (req, res) => {
     }
     //check if post has already been liked
     if (
+      // using filter returns an array hence possible to call length() unlike find() method
       post.likes.filter(like => like.user.toString() === req.user.id).length ===
       0
     ) {
@@ -214,6 +215,7 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
       return res.status(404).json({ msg: "Post not found" });
     }
     //get a comment by id based on returned post
+    //find() is cheap as it stops at first match and returns a comment object
     const comment = post.comments.find(
       comment => comment.id == req.params.comment_id
     );
