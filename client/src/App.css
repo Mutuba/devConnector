@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-  --primary-color: #17a2b8;
+  --primary-color: #008B8B;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -52,7 +52,7 @@ img {
 }
 
 .large {
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
@@ -177,7 +177,11 @@ img {
   background: var(--primary-color);
   color: #fff;
 }
-
+.btn-primary{
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
+}
 .btn-light,
 .bg-light,
 .badge-light,
