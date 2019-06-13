@@ -6,14 +6,14 @@ const Login = () => {
     email: "",
     password: ""
   });
-  const {  email, password } = formData;
+  const { email, password } = formData;
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
     e.preventDefault();
-    console.log("Success")
-    }
+    console.log("Success");
+  };
   return (
     <Fragment>
       <h4 className="large text-primary">Sign In</h4>
@@ -49,6 +49,6 @@ const Login = () => {
       </p>
     </Fragment>
   );
-};
 
+};
 export default Login;
