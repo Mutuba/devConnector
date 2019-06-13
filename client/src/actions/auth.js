@@ -8,9 +8,12 @@ export const register = ({ name, email, password }) => async dispatch => {
       "Content-Type": "application/json"
     }
   };
+
+  
   const body = JSON.stringify({ name, email, password });
   try {
     const res = await axios.post("/api/users", body, config);
+    console.log("TResponse", res);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
@@ -18,7 +21,9 @@ export const register = ({ name, email, password }) => async dispatch => {
   } catch (error) {
     //alert component is actively watching for errors and
     //whenever set alert is triggered the alerts will show
+    // console.log(error.response.data.errors);
     const errors = error.response.data.errors;
+
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
     }
