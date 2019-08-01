@@ -20,9 +20,6 @@ const Login = ({ login, isAuthenticated }) => {
     // console.log("Success");
   };
   // if logged in direct to dashboard
-  // if(isAuthenticated){
-  //   return <Redirect to='/dashboard'/>
-  // }
   return isAuthenticated ? (
     <Redirect to="/dashboard" />
   ) : (

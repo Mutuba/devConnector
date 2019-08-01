@@ -44,8 +44,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
   //redirect to dashboard if signup is successful
-  if(isAuthenticated){
-    return <Redirect to="/dashborad"/>
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
   }
   return (
     <Fragment>
@@ -112,12 +112,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated:PropTypes.bool,
+  isAuthenticated: PropTypes.bool
 };
 //connect component to store
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
+
 //pass null if the component does not have mapStateToProps
 export default connect(
   mapStateToProps,

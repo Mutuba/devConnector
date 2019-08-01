@@ -16,7 +16,7 @@ router.post(
         .isEmpty()
     ]
   ],
-  async function (req, res) {
+  async function(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -105,15 +105,43 @@ router.put("/like/:id", auth, async (req, res) => {
     if (!post) {
       return res.status(404).json({ msg: "Post not found" });
     }
+
+    if (
+      // check if user already dislikes the post and remove from dislikes
+      post.dislikes.filter(dislike => dislike.user.toString() === req.user.id)
+        .length > 0
+    ) {
+      // add the user as dislikes to the start of the array
+      const index = post.dislikes.findIndex(
+        dislike => dislike.user.toString() === req.user.id
+      );
+      // remove from likes coz the user is unliking by clicking on like if already liked
+      post.dislikes.splice(index, 1);
+      await post.save();
+      // res.json(post.dislikes);
+    }
     //check if post has already been liked
     if (
       post.likes.filter(like => like.user.toString() === req.user.id).length > 0
     ) {
-      return res.status(400).json({ msg: "Post already liked" });
+      //like exist already get it's index
+      const index = post.likes.findIndex(
+        like => like.user.toString() === req.user.id
+      );
+      // remove from likes coz the user is unliking by clicking on like if already liked
+      post.likes.splice(index, 1);
+      await post.save();
+      res.json(post.likes);
     }
-    post.likes.unshift({ user: req.user.id });
-    await post.save();
-    res.json(post.likes);
+    // {
+    //   return res.status(400).json({ msg: "Post already liked" });
+    // }
+    // add the user as likes to the start of the array
+    else {
+      post.likes.unshift({ user: req.user.id });
+      await post.save();
+      res.json(post.likes);
+    }
   } catch (error) {
     if (error.kind == "ObjectId")
       return res.status(400).json({
@@ -134,21 +162,39 @@ router.put("/unlike/:id", auth, async (req, res) => {
     if (!post) {
       return res.status(404).json({ msg: "Post not found" });
     }
-    //check if post has already been liked
+
+    // check if user likes the post and remove user from likes array
+    if (
+      post.likes.filter(like => like.user.toString() === req.user.id).length > 0
+    ) {
+      //like exist already get it's index
+      const index = post.likes.findIndex(
+        like => like.user.toString() === req.user.id
+      );
+      // remove from likes coz the user is unliking by clicking on like if already liked
+      post.likes.splice(index, 1);
+      await post.save();
+      // res.json(post.likes);
+    }
+    //check if post has already been disliked
     if (
       // using filter returns an array hence possible to call length() unlike find() method
-      post.likes.filter(like => like.user.toString() === req.user.id).length ===
-      0
+      post.dislikes.filter(dislike => dislike.user.toString() === req.user.id)
+        .length === 0
     ) {
-      return res.status(400).json({ msg: "Post has not yet been liked" });
+      // add the user as dislikes to the start of the array
+      post.dislikes.unshift({ user: req.user.id });
+      await post.save();
+      res.json(post.dislikes);
+    } else {
+      const index = post.dislikes.findIndex(
+        dislike => dislike.user.toString() === req.user.id
+      );
+      // remove dislike at found index as the only one denoted by 1
+      post.dislikes.splice(index, 1);
+      await post.save();
+      res.json(post.dislikes);
     }
-    const index = post.likes.findIndex(
-      like => like.user.toString() === req.user.id
-    );
-    // remove like at found index as the only one denoted by 1
-    post.likes.splice(index, 1);
-    await post.save();
-    res.json(post.likes);
   } catch (error) {
     if (error.kind == "ObjectId")
       return res.status(400).json({

@@ -1,11 +1,13 @@
 const express = require("express");
 const connectDB = require("./config/db");
 var bodyParser = require("body-parser");
+var cors = require("cors");
+
 const app = express();
 
 // support parsing of application/json type post data
 app.use(bodyParser.json());
-
+app.use(cors());
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 //connect to DB

@@ -1,6 +1,8 @@
 {
-  "mongoURI": "mongodb+srv://mutuba123:Baraka1234!*@devconnector-dnmks.mongodb.net/test",
+  "mongoURI": "mongodb://127.0.0.1:27017/devConnector",
   "jwtSecret":"mysupersecretkey",
   "githubClientID": "e06bab99558082fb3a55",
   "githubClientSecret":"457e38b461ac52975166bf721bdb44347ea3283a"
 }
+
+

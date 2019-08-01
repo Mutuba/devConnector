@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-  --primary-color: #2E8B57;
+  --primary-color: #2e8b57;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -12,14 +12,25 @@
   margin: 0;
   padding: 0;
 }
-
+.fa-fa-thumbs {
+  display: inline-block;
+  width: 30px;
+}
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Playfair Display", serif;
   font-size: 1rem;
   line-height: 1.6;
-  
   background-color: #fff;
   color: #333;
+
+}
+
+.background-green {
+  background-color: #2e8b57;
+}
+
+.background-white {
+  background-color: #f4f4f4;
 }
 
 a {
@@ -63,6 +74,10 @@ img {
   margin-bottom: 1rem;
 }
 
+.btn btn-light span {
+  display: inline-block;
+  width: 100px;
+}
 .text-center {
   text-align: center;
 }
@@ -178,10 +193,10 @@ img {
   background: var(--primary-color);
   color: #fff;
 }
-.btn-primary{
-      -moz-border-radius: 4px;
-      -webkit-border-radius: 4px;
-      border-radius: 4px;
+.btn-primary {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 .btn-light,
 .bg-light,
@@ -264,10 +279,10 @@ img {
   color: #888;
 }
 
-.form input[type='text'],
-.form input[type='email'],
-.form input[type='password'],
-.form input[type='date'],
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form input[type="date"],
 .form select,
 .form textarea {
   display: block;
@@ -277,7 +292,7 @@ img {
   border: 1px solid #ccc;
 }
 
-.form input[type='submit'],
+.form input[type="submit"],
 button {
   font: inherit;
 }
@@ -356,7 +371,7 @@ button {
 /* Landing Page */
 .landing {
   position: relative;
-  background: url('./img/showcase.jpg') no-repeat center center/cover;
+  background: url("./img/showcase.jpg") no-repeat center center/cover;
   height: 100vh;
 }
 
@@ -387,10 +402,10 @@ button {
 .profile-grid {
   display: grid;
   grid-template-areas:
-    'top top'
-    'about about'
-    'exp edu'
-    'github github';
+    "top top"
+    "about about"
+    "exp edu"
+    "github github";
   grid-gap: 1rem;
 }
 
@@ -441,15 +456,15 @@ button {
   margin-bottom: 1rem;
 }
 
-.profile-exp>div,
-.profile-edu>div {
+.profile-exp > div,
+.profile-edu > div {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;
 }
 
-.profile-exp>div:last-child,
-.profile-edu>div:last-child {
+.profile-exp > div:last-child,
+.profile-edu > div:last-child {
   border: 0;
 }
 
@@ -466,12 +481,12 @@ button {
   display: flex;
 }
 
-.profile-github .repo>div:first-child {
+.profile-github .repo > div:first-child {
   flex: 7;
   flex-basis: 70%;
 }
 
-.profile-github>div:last-child {
+.profile-github > div:last-child {
   flex: 3;
   flex-basis: 20%;
 }
@@ -489,7 +504,7 @@ button {
   align-items: center;
 }
 
-.post>div:first-child {
+.post > div:first-child {
   text-align: center;
 }
 
@@ -573,11 +588,11 @@ button {
 
   .profile-grid {
     grid-template-areas:
-      'top'
-      'about'
-      'exp'
-      'edu'
-      'github';
+      "top"
+      "about"
+      "exp"
+      "edu"
+      "github";
   }
 
   .profile-about .skills {
@@ -597,5 +612,176 @@ button {
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+}
+
+body {
+  background: #fff;
+}
+
+#loader {
+  animation: animate 1.5s linear infinite;
+  clip: rect(0, 80px, 80px, 40px);
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  left: calc(50% - 40px);
+  top: calc(50% - 40px);
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(220deg);
+  }
+}
+
+#loader:after {
+  animation: animate2 1.5s ease-in-out infinite;
+  clip: rect(0, 80px, 80px, 40px);
+  content: "";
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  position: absolute;
+}
+
+@keyframes animate2 {
+  0% {
+    box-shadow: inset rgb(107, 216, 97) 0 0 0 17px;
+    transform: rotate(-140deg);
+  }
+
+  50% {
+    box-shadow: inset rgb(107, 216, 97) 0 0 0 2px;
+  }
+
+  100% {
+    box-shadow: inset rgb(107, 216, 97) 0 0 0 17px;
+    transform: rotate(140deg);
+  }
+}
+
+/* #snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+} */
+/* modal */
+.modal-buttons {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+.confirm {
+  background-color: #28a745;
+  border-radius: 5px;
+  color: #fff;
+  height: 50px;
+  width: 90px;
+}
+.cancel {
+  border-radius: 5px;
+  height: 50px;
+  width: 90px;
+}
+.modal-content p {
+  text-align: center;
+  margin-top: 50px;
+}
+.divider {
+  width: 25px;
+  display: inline-block;
+}
+
+@media only screen and (max-width: 600px) {
+  .confirm {
+    height: 20px;
+    width: 50px;
+    font-size: 3vw;
+  }
+  .cancel {
+    border-radius: 5px;
+    height: 20px;
+    width: 50px;
+    font-size: 3vw;
+  }
+  .divider {
+    width: 5px;
+    display: inline-block;
+  }
+  .modal-content p {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 3vw;
   }
 }

@@ -19,7 +19,7 @@ router.get("/me", auth, async (req, res) => {
     );
     if (!profile) {
       return res.status(400).json({
-        msg: "There is no profile this user"
+        msg: "There is no profile for this user"
       });
     }
     //return a jsonified user profile
@@ -192,6 +192,7 @@ router.put(
     const {
       title,
       company,
+      website,
       location,
       from,
       to,
@@ -202,6 +203,7 @@ router.put(
       title,
       company,
       location,
+      website,
       from,
       to,
       current,

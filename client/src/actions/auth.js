@@ -24,7 +24,8 @@ export const loadUser = () => async dispatch => {
   try {
     // valid token's response is user data as per the token
     //hence the dispatch of USER_LOADED with payload as res.data
-    const res = await axios.get("/api/auth");
+    const res = await axios.get("http://localhost:5000/api/auth");
+    // console.log("here", res.data);
     dispatch({
       type: USER_LOADED,
       payload: res.data
@@ -47,7 +48,11 @@ export const register = ({ name, email, password }) => async dispatch => {
 
   const body = JSON.stringify({ name, email, password });
   try {
-    const res = await axios.post("/api/users", body, config);
+    const res = await axios.post(
+      "http://localhost:5000/api/users",
+      body,
+      config
+    );
     dispatch(registerSuccess(res.data));
     //if reg is successful a token will be set in the local storage
     // hence makes sense to load a user of the token
@@ -56,7 +61,7 @@ export const register = ({ name, email, password }) => async dispatch => {
     //alert component is actively watching for errors and
     //whenever set alert is triggered the alerts will show
     // console.log(error.response.data.errors);
-    const errors = error.response.data.errors;
+    let errors = error.response.data.errors;
 
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
@@ -69,7 +74,6 @@ export const register = ({ name, email, password }) => async dispatch => {
 
 // action creator for login
 export const login = ({ email, password }) => async dispatch => {
-  console.log("Mutuba", email);
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -79,14 +83,18 @@ export const login = ({ email, password }) => async dispatch => {
   //coverts to json string to be sent to the backend
   const body = JSON.stringify({ email, password });
   try {
-    const res = await axios.post("/api/auth", body, config);
+    const res = await axios.post(
+      "http://localhost:5000/api/auth",
+      body,
+      config
+    );
     dispatch(loginSuccess(res.data));
     dispatch(loadUser);
   } catch (error) {
     //alert component is actively watching for errors and
     //whenever set alert is triggered the alerts will show
-    // console.log(error.response.data.errors);
-    const errors = error.response.data.errors;
+    console.log(error.response.data.errors);
+    let errors = error.response.data.errors;
 
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));

@@ -15,7 +15,27 @@ const PostSchema = new Schema({
   avatar: {
     type: String
   },
+  // action: [
+  //   {
+  //     user: {
+  //       type: Schema.Types.ObjectId,
+  //       ref: "user"
+  //     },
+  //     type: {
+  //       type: Schema.Types.String,
+  //       enum: ['like', 'dislike'],
+  //     },
+  //   }
+  // ],
   likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "user"
+      }
+    }
+  ],
+  dislikes: [
     {
       user: {
         type: Schema.Types.ObjectId,
