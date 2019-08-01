@@ -1,6 +1,8 @@
 import uuid from "uuid";
 import { SET_ALERT, REMOVE_ALERT } from "./types";
-export const setAlert = (msg, alertType, timeout=2000) => dispatch => {
+// setAlert is an action creator and a thunk as it dispatches an action type and passes a payload to it
+// that it accepts as arguments
+export const setAlert = (msg, alertType, timeout = 2000) => dispatch => {
   const id = uuid.v4();
   dispatch({
     type: SET_ALERT,
@@ -11,4 +13,7 @@ export const setAlert = (msg, alertType, timeout=2000) => dispatch => {
     }
   });
   setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
+
 };
+
+

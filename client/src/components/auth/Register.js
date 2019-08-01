@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 // import axios from "axios";
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,6 +14,7 @@ const Register = ({ setAlert, register }) => {
   });
   const { name, email, password, password2 } = formData;
   const onChange = e =>
+    // rest operator is used to partially values of the form(formData)
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
@@ -21,7 +22,7 @@ const Register = ({ setAlert, register }) => {
     if (password !== password2) {
       setAlert("Passwords do not match", "danger");
     } else {
-      register({name,email,password})
+      register({ name, email, password });
       // const user = {
       //   name,
       //   email,
@@ -42,6 +43,10 @@ const Register = ({ setAlert, register }) => {
       // }
     }
   };
+  //redirect to dashboard if signup is successful
+  if(isAuthenticated){
+    return <Redirect to="/dashborad"/>
+  }
   return (
     <Fragment>
       <h4 className="large text-primary">Sign Up</h4>
@@ -64,6 +69,7 @@ const Register = ({ setAlert, register }) => {
             type="email"
             placeholder="Email Address"
             name="email"
+            // value from state
             value={email}
             onChange={e => onChange(e)}
             required
@@ -105,10 +111,15 @@ const Register = ({ setAlert, register }) => {
 };
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  isAuthenticated:PropTypes.bool,
 };
 //connect component to store
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+//pass null if the component does not have mapStateToProps
 export default connect(
-  null,
-  { setAlert,register }
+  mapStateToProps,
+  { setAlert, register }
 )(Register);

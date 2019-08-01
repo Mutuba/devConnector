@@ -18,7 +18,7 @@ const initialState = [];
 const alert = (state = initialState, action) => {
   // destructured syntax
   const { type, payload } = action;
-  console.log('My Payload', payload)
+  // console.log('My Payload', payload)
 
   switch (type) {
     case SET_ALERT:
