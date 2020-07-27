@@ -14,7 +14,7 @@ import {
 // Get posts
 export const getPosts = () => async dispatch => {
   try {
-    const res = await axios.get("http://localhost:5000/api/posts");
+    const res = await axios.get("https://mutubaconnect.herokuapp.com/api/posts");
     dispatch({
       type: GET_POSTS,
       payload: res.data
@@ -33,7 +33,7 @@ export const getPosts = () => async dispatch => {
 // Add like
 export const addLike = (id, userId) => async dispatch => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/posts/like/${id}`);
+    const res = await axios.put(`https://mutubaconnect.herokuapp.com/api/posts/like/${id}`);
     dispatch({
       type: UPDATE_LIKES,
       payload: { id, likes: res.data, userId }
@@ -49,7 +49,7 @@ export const addLike = (id, userId) => async dispatch => {
 // Remove like
 export const removeLike = (id, userId) => async dispatch => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/posts/unlike/${id}`);
+    const res = await axios.put(`https://mutubaconnect.herokuapp.com/api/posts/unlike/${id}`);
 
     dispatch({
       type: UPDATE_DISLIKES,
@@ -66,7 +66,7 @@ export const removeLike = (id, userId) => async dispatch => {
 // Delete post
 export const deletePost = id => async dispatch => {
   try {
-    await axios.delete(`http://localhost:5000/api/posts/${id}`);
+    await axios.delete(`https://mutubaconnect.herokuapp.com/api/posts/${id}`);
 
     dispatch({
       type: DELETE_POST,
@@ -92,7 +92,7 @@ export const addPost = formData => async dispatch => {
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/posts",
+      "https://mutubaconnect.herokuapp.com/api/posts",
       formData,
       config
     );
@@ -115,7 +115,7 @@ export const addPost = formData => async dispatch => {
 export const getPost = id => async dispatch => {
   console.log("After button click");
   try {
-    const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
+    const res = await axios.get(`https://mutubaconnect.herokuapp.com/api/posts/${id}`);
 
     dispatch({
       type: GET_POST,
@@ -139,7 +139,7 @@ export const addComment = (postId, formData) => async dispatch => {
 
   try {
     const res = await axios.post(
-      `http://localhost:5000/api/posts/comment/${postId}`,
+      `https://mutubaconnect.herokuapp.com/api/posts/comment/${postId}`,
       formData,
       config
     );
@@ -162,7 +162,7 @@ export const addComment = (postId, formData) => async dispatch => {
 export const deleteComment = (postId, commentId) => async dispatch => {
   try {
     await axios.delete(
-      `http://localhost:5000/api/posts/comment/${postId}/${commentId}`
+      `https://mutubaconnect.herokuapp.com/api/posts/comment/${postId}/${commentId}`
     );
 
     dispatch({

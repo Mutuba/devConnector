@@ -2,7 +2,11 @@ const express = require("express");
 const connectDB = require("./config/db");
 var bodyParser = require("body-parser");
 var cors = require("cors");
+var dotenv = require("dotenv")
+const path = require('path');
 
+
+dotenv.config()
 const app = express();
 
 // support parsing of application/json type post data
@@ -19,8 +23,10 @@ app.use(
     extended: true
   })
 );
+
+
 //api routes
-app.get("/", (req, res) => res.send("API Running"));
+// app.get("/", (req, res) => res.send("API Running"));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/profile", require("./routes/api/profile"));
 app.use("/api/auth", require("./routes/api/auth"));
@@ -34,6 +40,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
+  
 }
 //app port
 const PORT = process.env.PORT || 5000;

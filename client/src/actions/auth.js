@@ -24,7 +24,7 @@ export const loadUser = () => async dispatch => {
   try {
     // valid token's response is user data as per the token
     //hence the dispatch of USER_LOADED with payload as res.data
-    const res = await axios.get("http://localhost:5000/api/auth");
+    const res = await axios.get("https://mutubaconnect.herokuapp.com/api/auth");
     // console.log("here", res.data);
     dispatch({
       type: USER_LOADED,
@@ -49,7 +49,7 @@ export const register = ({ name, email, password }) => async dispatch => {
   const body = JSON.stringify({ name, email, password });
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/users",
+      "https://mutubaconnect.herokuapp.com/api/users",
       body,
       config
     );
@@ -84,7 +84,7 @@ export const login = ({ email, password }) => async dispatch => {
   const body = JSON.stringify({ email, password });
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/auth",
+      "https://mutubaconnect.herokuapp.com/api/auth",
       body,
       config
     );

@@ -15,7 +15,7 @@ import {
 // Get current users profile
 export const getCurrentProfile = () => async dispatch => {
   try {
-    const res = await axios.get("http://localhost:5000/api/profile/me");
+    const res = await axios.get("https://mutubaconnect.herokuapp.com/api/profile/me");
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -33,7 +33,7 @@ export const getProfiles = () => async dispatch => {
   // dispatch({ type: CLEAR_PROFILE });
 
   try {
-    const res = await axios.get("http://localhost:5000/api/profile");
+    const res = await axios.get("https://mutubaconnect.herokuapp.com/api/profile");
 
     dispatch({
       type: GET_PROFILES,
@@ -51,7 +51,7 @@ export const getProfiles = () => async dispatch => {
 export const getProfileById = userId => async dispatch => {
   try {
     const res = await axios.get(
-      `http://localhost:5000/api/profile/user/${userId}`
+      `https://mutubaconnect.herokuapp.com/api/profile/user/${userId}`
     );
     console.log("In profile", res.data);
     dispatch({
@@ -100,7 +100,7 @@ export const createProfile = (
     };
 
     const res = await axios.post(
-      "http://localhost:5000/api/profile",
+      "https://mutubaconnect.herokuapp.com/api/profile",
       formData,
       config
     );
@@ -142,7 +142,7 @@ export const addExperience = (formData, history) => async dispatch => {
     };
 
     const res = await axios.put(
-      "http://localhost:5000/api/profile/experience",
+      "https://mutubaconnect.herokuapp.com/api/profile/experience",
       formData,
       config
     );
@@ -182,7 +182,7 @@ export const addEducation = (formData, history) => async dispatch => {
     };
 
     const res = await axios.put(
-      "http://localhost:5000/api/profile/education",
+      "https://mutubaconnect.herokuapp.com/api/profile/education",
       formData,
       config
     );
@@ -209,6 +209,7 @@ export const addEducation = (formData, history) => async dispatch => {
   }
 };
 
+
 // Delete experience
 export const deleteExperience = id => async dispatch => {
   if (localStorage.token) {
@@ -216,7 +217,7 @@ export const deleteExperience = id => async dispatch => {
   }
   try {
     const res = await axios.delete(
-      `http://localhost:5000/api/profile/experience/${id}`
+      `https://mutubaconnect.herokuapp.com/api/profile/experience/${id}`
     );
 
     dispatch({
@@ -237,7 +238,7 @@ export const deleteExperience = id => async dispatch => {
 export const deleteEducation = id => async dispatch => {
   try {
     const res = await axios.delete(
-      `http://localhost:5000/api/profile/education/${id}`
+      `https://mutubaconnect.herokuapp.com/api/profile/education/${id}`
     );
 
     dispatch({
@@ -260,7 +261,7 @@ export const deleteAccount = () => async dispatch => {
     setAuthToken(localStorage.token);
   }
   try {
-    await axios.delete("http://localhost:5000/api/profile");
+    await axios.delete("https://mutubaconnect.herokuapp.com/api/profile");
 
     dispatch({ type: CLEAR_PROFILE });
     dispatch({ type: ACCOUNT_DELETED });
