@@ -20,9 +20,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-   "test": "jest",
-   "test:watch": "jest --watch"
-
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,10 +38,11 @@
       "last 1 safari version"
     ]
   },
-
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>__tests__/setup/setupEnzyme.js",
-    "testPathIgnorePatterns": ["<rootDir>/__tests__/setup/"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup/"
+    ]
   },
- "proxy": "http://localhost:5000/"
+  "proxy": "http://localhost:5000/"
 }

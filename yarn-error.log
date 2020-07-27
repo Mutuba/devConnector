@@ -1,0 +1,62 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add gulp
+
+PATH: 
+  /Users/mutuba/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.18.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26)
+
+npm manifest: 
+  {
+    "name": "devconnector",
+    "version": "1.0.0",
+    "description": "A social platform for devs",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server",
+      "server": "nodemon server",
+      "client": "npm start --prefix client",
+      "dev": "concurrently \"npm run server\" \"npm run client\" "
+    },
+    "author": "Mutuba",
+    "license": "ISC",
+    "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.19.0",
+      "config": "^3.1.0",
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "express-validator": "^5.3.1",
+      "gravatar": "^1.8.0",
+      "http-proxy-middleware": "^0.19.1",
+      "jsonwebtoken": "^8.5.1",
+      "lodah": "0.0.1-security",
+      "lodash": "^4.17.15",
+      "mongoose": "^5.5.12",
+      "react": "^16.8.6",
+      "react-redux": "^7.1.0",
+      "request": "^2.88.0",
+      "semantic-ui": "^2.4.2"
+    },
+    "devDependencies": {
+      "concurrently": "^4.1.0",
+      "nodemon": "^1.19.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
