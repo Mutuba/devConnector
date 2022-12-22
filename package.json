@@ -27,7 +27,7 @@
     "gravatar": "^1.8.0",
     "gulp-cli": "^2.3.0",
     "http-proxy-middleware": "^0.19.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodah": "0.0.1-security",
     "lodash": "^4.17.15",
     "mongoose": "^5.5.12",
